@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria de Seguranca SSL/TLS</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#eef2f7;
+}
+
+.container{
+    width:900px;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    color:#1f2937;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:25px;
+    box-shadow:0px 5px 20px rgba(0,0,0,.08);
+}
+
+input{
+
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    margin-bottom:20px;
+
+    border:1px solid #ccc;
+    border-radius:5px;
+
+}
+
+button{
+
+    width:100%;
+    padding:15px;
+
+    background:#2563eb;
+    color:white;
+
+    border:none;
+    border-radius:5px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+}
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
+.resultado{
+
+    margin-top:30px;
+
+}
+
+.status{
+
+    font-size:22px;
+    font-weight:bold;
+
+}
+
+.risco{
+
+    font-size:20px;
+
+    margin:15px 0;
+
+}
+
+.baixo{
+
+    color:green;
+
+}
+
+.medio{
+
+    color:orange;
+
+}
+
+.alto{
+
+    color:red;
+
+}
+
+.vulnerabilidade{
+
+    border-left:5px solid #2563eb;
+
+    background:#f8fafc;
+
+    padding:15px;
+
+    margin-top:15px;
+
+}
+
+.loading{
+
+    display:none;
+
+    margin-top:20px;
+
+    color:#2563eb;
+
+    font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Auditoria Automatizada SSL/TLS</h1>
+
+<div class="card">
+
+<label>Dominio</label>
+
+<input
+id="url"
+placeholder="Ex: google.com"
+/>
+
+<label>Email</label>
+
+<input
+id="email"
+type="email"
+placeholder="email@teste.com"
+/>
+
+<button onclick="analisar()">
+
+Iniciar Auditoria
+
+</button>
+
+<div class="loading" id="loading">
+
+Executando auditoria...
+
+</div>
+
+<div id="resultado" class="resultado">
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+async function analisar(){
+
+    const dados = {
+        status: "Seguro",
+        classificacao_risco: "Baixo",
+        vulnerabilidades: [
+            {
+                item: "TLS 1.0 habilitado",
+                descricao: "O servidor aceita TLS 1.0.",
+                recomendacao: "Desabilitar TLS 1.0."
+            },
+            {
+                item: "Certificado próximo do vencimento",
+                descricao: "Expira em 15 dias.",
+                recomendacao: "Renovar certificado."
+            }
+        ]
+    };
+
+    mostrarResultado(dados);
+
+
+}
+
+function mostrarResultado(dados){
+
+let html="";
+
+html+=`
+
+<h2>Resultado da Auditoria</h2>
+
+<br>
+
+<p class="status">
+
+Status: ${dados.status}
+
+</p>
+
+<p class="risco ${dados.classificacao_risco.toLowerCase()}">
+
+Classificacao de risco: ${dados.classificacao_risco}
+
+</p>
+
+<h3>Vulnerabilidades Encontradas</h3>
+
+`;
+
+dados.vulnerabilidades.forEach(item=>{
+
+html+=`
+
+<div class="vulnerabilidade">
+
+<h4>${item.item}</h4>
+
+<p><strong>Descrição:</strong> ${item.descricao}</p>
+
+<p><strong>Recomendação:</strong> ${item.recomendacao}</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("resultado").innerHTML=html;
+
+}
+
+</script>
+
+</body>
+</html>
