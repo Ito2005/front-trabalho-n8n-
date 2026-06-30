@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Auditoria SSL</title>
+</head>
+
+<body>
+
+<h1>Auditoria de Segurança</h1>
+
+<input id="url" placeholder="Digite o domínio">
+<input id="email" placeholder="Digite o email">
+
+<button onclick="analisar()">Iniciar Auditoria</button>
+
+<div id="resultado"></div>
+
+<script>
+
+function analisar() {
+
+    // 🔥 DADOS SIMULADOS
+    const dados = {
+        status: "Seguro",
+        classificacao_risco: "Baixo",
+        vulnerabilidades: [
+            {
+                item: "TLS 1.0 habilitado",
+                descricao: "Versão antiga do protocolo ativa.",
+                recomendacao: "Desativar TLS 1.0"
+            }
+        ]
+    };
+
+    mostrarResultado(dados);
+}
+
+function mostrarResultado(dados) {
+
+    let html = "";
+
+    html += "<h2>Status: " + dados.status + "</h2>";
+    html += "<h3>Risco: " + dados.classificacao_risco + "</h3>";
+
+    dados.vulnerabilidades.forEach(v => {
+        html += "<hr>";
+        html += "<b>" + v.item + "</b><br>";
+        html += v.descricao + "<br>";
+        html += "<i>" + v.recomendacao + "</i><br>";
+    });
+
+    document.getElementById("resultado").innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>
