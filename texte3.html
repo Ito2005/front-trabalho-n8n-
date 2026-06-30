@@ -186,72 +186,106 @@ Analisando servidor...
 
 async function auditar(){
 
+    document.getElementById("resultado").style.display="none";
     document.getElementById("loading").style.display="block";
 
-    document.getElementById("resultado").style.display="none";
+    const url=document.getElementById("url").value;
 
-    await new Promise(resolve => setTimeout(resolve,2000));
+    const email=document.getElementById("email").value;
 
-    const dados={
+    try{
 
-        status:"Seguro",
+        const response=await fetch("https://mercerproject.app.n8n.cloud/webhook-test/auditoria-ssl",{
 
-        classificacao_risco:"Baixo",
+            method:"POST",
 
-        vulnerabilidades:[
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-            {
+            body:JSON.stringify({
 
-                item:"Nenhuma vulnerabilidade crítica encontrada",
+                url:url,
+                email:email
 
-                descricao:"Os protocolos SSL/TLS estão configurados corretamente.",
+            })
 
-                recomendacao:"Nenhuma ação necessária."
+        });
 
-            }
+        const dados=await response.json();
 
-        ]
+        document.getElementById("loading").style.display="none";
+        document.getElementById("resultado").style.display="block";
 
-    };
+        const status=document.getElementById("status");
 
-    document.getElementById("loading").style.display="none";
+        status.innerHTML="Status: "+dados.status;
 
-    document.getElementById("resultado").style.display="block";
+        let classe="baixo";
 
-    const status=document.getElementById("status");
+        switch(dados.classificacao_risco.toLowerCase()){
 
-    status.innerHTML="Status: "+dados.status;
+            case "baixo":
+                classe="baixo";
+            break;
 
-    status.className="status baixo";
+            case "médio":
+            case "medio":
+                classe="medio";
+            break;
 
-    document.getElementById("risco").innerHTML=dados.classificacao_risco;
+            case "alto":
+                classe="alto";
+            break;
 
-    const lista=document.getElementById("lista");
+            case "crítico":
+            case "critico":
+                classe="critico";
+            break;
 
-    lista.innerHTML="";
+        }
 
-    dados.vulnerabilidades.forEach(v=>{
+        status.className="status "+classe;
 
-        lista.innerHTML+=`
+        document.getElementById("risco").innerHTML=dados.classificacao_risco;
 
-        <div class="vulnerabilidade">
+        const lista=document.getElementById("lista");
 
-            <h3>${v.item}</h3>
+        lista.innerHTML="";
 
-            <p><b>Descrição:</b> ${v.descricao}</p>
+        dados.vulnerabilidades.forEach(v=>{
 
-            <br>
+            lista.innerHTML+=`
 
-            <p><b>Recomendação:</b> ${v.recomendacao}</p>
+            <div class="vulnerabilidade">
 
-        </div>
+                <h3>${v.item}</h3>
 
-        `;
+                <p><b>Descrição:</b> ${v.descricao}</p>
 
-    });
+                <br>
+
+                <p><b>Recomendação:</b> ${v.recomendacao}</p>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch(e){
+
+        document.getElementById("loading").style.display="none";
+
+        alert("Erro ao conectar com o servidor.");
+
+        console.log(e);
+
+    }
 
 }
-
 
 </script>
 
