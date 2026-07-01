@@ -1,44 +1,54 @@
 # Prompt Utilizado para fazer o Fornt End
 
 ### Pergunta 1
-Contexto: 
-Estou tendo uma matéria de Segurança da Informação e o trabalho da matéria, consiste no seguinte:  
+## Contexto
 
-    Desenvolver uma ferramenta automatizada utilizando agentes de IA estou utilizando o n8n capaz de realizar diagnóstico de vulnerabilidades, identificando riscos e sugerindo ações corretivas.   
+Estou tendo uma matéria de **Segurança da Informação** e o trabalho consiste em desenvolver uma ferramenta automatizada utilizando **n8n** capaz de realizar o diagnóstico de vulnerabilidades, identificando riscos e sugerindo ações corretivas.
 
-Descrição A ferramenta desenvolvida deve:   
-    Coletar informações do sistema alvo.   
-    Identificar vulnerabilidades  
-    Classificar e apresentar riscos  
-    Sugerir medidas e ações corretivas  
+## Descrição
 
-Cenário: 
-Servidor Web 
+A ferramenta desenvolvida deve:
 
-A ferramenta deve:   
-    Analisar protocolos criptográficos (SSL/TLS)   
-    Identificar configurações inseguras   
-    Avaliar certificados digitais   
-    Detectar falhas de configuração   
+- Coletar informações do sistema alvo.
+- Identificar vulnerabilidades.
+- Classificar e apresentar riscos.
+- Sugerir medidas e ações corretivas.
 
-Saídas esperadas:   
-    Lista de vulnerabilidades   
-    Classificação de risco   
-    Recomendações de correção   
-Requisitos Técnicos:  
-    Utilizar ferramenta de automação (ex: n8n)   
-    Integrar fluxo de coleta, análise e resposta  
-    Implementar lógica   
-    Gerar saída em relatório ou dashboard   
-    Relatório:   
-        Vulnerabilidades.   
-        Riscos.   
-        Recomendações   
+## Cenário
+
+**Servidor Web**
+
+A ferramenta deve:
+
+- Analisar protocolos criptográficos (SSL/TLS).
+- Identificar configurações inseguras.
+- Avaliar certificados digitais.
+- Detectar falhas de configuração.
+
+## Saídas Esperadas
+
+- Lista de vulnerabilidades.
+- Classificação de risco.
+- Recomendações de correção.
+
+## Requisitos Técnicos
+
+- Utilizar ferramenta de automação (ex.: n8n).
+- Integrar fluxo de coleta, análise e resposta.
+- Implementar lógica automatizada.
+- Gerar saída em relatório ou dashboard.
+
+## Relatório
+
+- Vulnerabilidades.
+- Riscos.
+- Recomendações.
     
 ### pergunta     
 Eu fiquei responsável por fazer o front end. Por onde o usuário colocara o endereço do site para ser analisado    
-Poderia gerar o código front end em .html que atendesse esses códigos abaixo vindos do n8n      
-obs: ---------- são a separação entre os diferentes códigos 
+Poderia gerar o código front end em .html que atendesse esses códigos abaixo vindos do n8n 
+
+- obs: ---------- são a separação entre os diferentes códigos 
 
 ```text
 {
