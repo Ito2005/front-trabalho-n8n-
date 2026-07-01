@@ -43,7 +43,7 @@ input{
     margin-top:8px;
     margin-bottom:20px;
 
-    border:none;
+    border:2px solid #ccc;
     border-radius:6px;
 
     font-size:15px;
@@ -138,14 +138,18 @@ button:hover{
 <label>Endereço do Site</label>
 <input
 id="url"
-placeholder="exemplo.com.br">
+placeholder="Dominio.com.br"
+oninput="validarCampos()">
 
 <label>Email</label>
 <input
 id="email"
-placeholder="usuario@email.com">
+placeholder="usuario@email.com"
+oninput="validarCampos()">
 
-<button onclick="auditar()">
+<button
+id="btnEnviar"
+onclick="auditar()" disabled>
 Iniciar Auditoria
 </button>
 
@@ -183,6 +187,45 @@ Analisando servidor...
 </div>
 
 <script>
+
+function validarCampos(){
+
+    const dominio = document.getElementById("url");
+    const email = document.getElementById("email");
+
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexDominio = /^([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+
+    const dominioValido = regexDominio.test(dominio.value.trim());
+    const emailValido = regexEmail.test(email.value.trim());
+
+    // Validação do domínio
+    if(dominio.value.trim() == ""){
+        dominio.style.border = "2px solid #ccc";
+    }
+    else if(dominioValido){
+        dominio.style.border = "2px solid #22c55e";
+    }
+    else{
+        dominio.style.border = "2px solid #ef4444";
+    }
+
+    // Validação do e-mail
+    if(email.value.trim() == ""){
+        email.style.border = "2px solid #ccc";
+    }
+    else if(emailValido){
+        email.style.border = "2px solid #22c55e";
+    }
+    else{
+        email.style.border = "2px solid #ef4444";
+    }
+
+    // Habilita ou desabilita o botão
+    document.getElementById("btnEnviar").disabled =
+        !(dominioValido && emailValido);
+
+}
 
 async function auditar(){
 
