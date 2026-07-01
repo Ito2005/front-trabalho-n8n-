@@ -1,11 +1,11 @@
 # Prompt Utilizado para fazer o Fornt End
 
 ### Pergunta 1
-## Contexto
+**Contexto**
 
 Estou tendo uma matéria de **Segurança da Informação** e o trabalho consiste em desenvolver uma ferramenta automatizada utilizando **n8n** capaz de realizar o diagnóstico de vulnerabilidades, identificando riscos e sugerindo ações corretivas.
 
-## Descrição
+**Descrição**
 
 A ferramenta desenvolvida deve:
 
@@ -14,37 +14,35 @@ A ferramenta desenvolvida deve:
 - Classificar e apresentar riscos.
 - Sugerir medidas e ações corretivas.
 
-## Cenário
+**Cenário 1: Servidor Web**   
 
-**Servidor Web**
-
-A ferramenta deve:
+**A ferramenta deve:**
 
 - Analisar protocolos criptográficos (SSL/TLS).
 - Identificar configurações inseguras.
 - Avaliar certificados digitais.
 - Detectar falhas de configuração.
 
-## Saídas Esperadas
+**Saídas Esperadas**   
 
 - Lista de vulnerabilidades.
 - Classificação de risco.
 - Recomendações de correção.
 
-## Requisitos Técnicos
+**Requisitos Técnicos**   
 
 - Utilizar ferramenta de automação (ex.: n8n).
 - Integrar fluxo de coleta, análise e resposta.
 - Implementar lógica automatizada.
 - Gerar saída em relatório ou dashboard.
 
-## Relatório
+**Relatório**   
 
 - Vulnerabilidades.
 - Riscos.
 - Recomendações.
     
-### pergunta     
+**Pergunta**        
 Eu fiquei responsável por fazer o front end. Por onde o usuário colocara o endereço do site para ser analisado    
 Poderia gerar o código front end em .html que atendesse esses códigos abaixo vindos do n8n 
 
@@ -93,27 +91,8 @@ fetch("https://mercerproject.app.n8n.cloud/webhook-test/auditoria-ssl", requestO
 
 ```
 
+
+
 ### Pergunta 2 
 
 Poderia me mostrar um código para eu colocar no meu front end para que a borda do campo de escrita de endereço do site e email fiquem verdes quando de texto estiver correto e a borda vermelha quando estiver incorreto
-
-
-
-### Passo 1: Configurar o HTTP Request no n8n
-
-Substitua o nó HTTP Request antigo (ou crie um novo entre o Webhook e o AI Agent) e configure a barra lateral direita dele assim:
-
-1. **Method:** Mude para `GET`.
-2. **URL:** Cole a URL mudando a parte final para capturar dinamicamente o que o usuário digitou no frontend:
-
-
-```text
-https://whoisjson.com/api/v1/ssl-cert-check?domain={{ $json.body.url }}
-
-```
-
-
-3. **Authentication:** Mude para `None` (pois vamos colocar o token direto no cabeçalho/header, exatamente como o seu curl faz).
-4. **Headers (Cabeçalhos):** Abaixo de Authentication, clique em **Add Header** e preencha com os dois campos:
-* **Name:** `Authorization`
-* **Value:** `TOKEN=seu_token_aqui` *(Substitua `seu_token_aqui` pelo seu token real do WhoisJSON, mantendo a palavra `TOKEN=` na frente)*.
